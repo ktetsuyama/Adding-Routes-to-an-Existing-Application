@@ -1,7 +1,7 @@
-const express = require('express');
-const path = require('path');
-const { clog } = require('./middleware/clog');
-const api = require('./routes/index.js');
+const express = require("express");
+const path = require("path");
+const { clog } = require("./middleware/clog");
+const api = require("./routes/index.js");
 
 const PORT = process.env.port || 3001;
 
@@ -13,20 +13,31 @@ app.use(clog);
 // Middleware for parsing JSON and urlencoded form data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/api', api);
+app.use("/api", api);
 
-app.use(express.static('public'));
+app.use(express.static("public"));
 
 // GET Route for homepage
-app.get('/', (req, res) =>
-  res.sendFile(path.join(__dirname, '/public/index.html'))
+app.get("/", (req, res) =>
+	res.sendFile(path.join(__dirname, "/public/index.html"))
 );
 
 // GET Route for feedback page
-app.get('/feedback', (req, res) =>
-  res.sendFile(path.join(__dirname, '/public/pages/feedback.html'))
+app.get("/feedback", (req, res) =>
+	res.sendFile(path.join(__dirname, "/public/pages/feedback.html"))
 );
 
+// Get Route for 404 page
+app.get("*", (req, res) =>
+	res.sendFile(path.join(__dirname, "/public/pages/404.html"))
+);
+
+// POST Route to store diagnostics
+app.post("api/diagnostics", (req, res) => {
+	res.json(`${req.method} invalid form submission`);
+	console.info(`${req.method} invalid form submission`);
+});
+
 app.listen(PORT, () =>
-  console.log(`App listening at http://localhost:${PORT}`)
+	console.log(`App listening at http://localhost:${PORT}`)
 );
