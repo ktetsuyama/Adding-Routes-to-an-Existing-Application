@@ -28,19 +28,19 @@ app.get("/feedback", (req, res) =>
 	res.sendFile(path.join(__dirname, "/public/pages/feedback.html"))
 );
 
-// Get Route wildcard for 404 page
-app.get("*", (req, res) =>
-	res.sendFile(path.join(__dirname, "/public/pages/404.html"))
-);
-
 // GET for diagnostics
 app.get("/api/diagnostics", (req, res) => res.json(diag));
 
 // POST Route to store diagnostics
-app.post("api/diagnostics", (req, res) => {
+app.post("/api/diagnostics", (req, res) => {
 	res.json(`${req.method} invalid form submission`);
 	console.info(`${req.method} invalid form submission`);
 });
+
+// Get Route wildcard for 404 page
+app.get("*", (req, res) =>
+	res.sendFile(path.join(__dirname, "/public/pages/404.html"))
+);
 
 app.listen(PORT, () =>
 	console.log(`App listening at http://localhost:${PORT}`)

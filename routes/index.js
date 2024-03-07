@@ -7,7 +7,7 @@ const diagnosticsRouter = require("./diagnostics");
 // TODO: import your diagnostics route
 router.use("/tips", tipsRouter);
 router.use("/feedback", feedbackRouter);
-router.use("/api/diagnostics", diagnosticsRouter);
+router.use("/diagnostics", diagnosticsRouter);
 // TODO: Initialize diagnostics route
 
 module.exports = router;

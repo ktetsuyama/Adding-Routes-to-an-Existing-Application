@@ -4,6 +4,7 @@ const { readAndAppend, readFromFile } = require("../helpers/fsUtils");
 
 // GET Route for retrieving diagnostic information
 diagnostics.get("/api/diagnostics", (req, res) => {
+	console.log("get diagnostics");
 	// TODO: Logic for sending all the content of db/diagnostics.json
 	readFromFile("../db/diagnostics.json")
 		.then((data) => res.json(JSON.parse(data)))
@@ -12,9 +13,11 @@ diagnostics.get("/api/diagnostics", (req, res) => {
 
 // POST Route for a error logging
 diagnostics.post("/api/diagnostics", (req, res) => {
+	console.log("Test bad request", req);
 	// TODO: Logic for appending data to the db/diagnostics.json file
-	readAndAppend("../db/diagnostics.json", newDiagnostic)
-		.then(() => res.status(200).json("Diagnostic data logged"))
+	const newDiagnostic = req.body;
+	readAndAppend(newDiagnostic, "./db/diagnostics.json")
+		.then(() => res.status(201).json("Diagnostic data logged"))
 		.catch((err) => res.status(500).json("Error logging diagnostic data"));
 });
 
