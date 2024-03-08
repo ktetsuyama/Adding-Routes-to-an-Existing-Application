@@ -29,13 +29,13 @@ app.get("/feedback", (req, res) =>
 );
 
 // GET for diagnostics
-app.get("/api/diagnostics", (req, res) => res.json(diag));
+// app.get("/api/diagnostics", (req, res) => res.json(diag));
 
 // POST Route to store diagnostics
-app.post("/api/diagnostics", (req, res) => {
-	res.json(`${req.method} invalid form submission`);
-	console.info(`${req.method} invalid form submission`);
-});
+// app.post("/api/diagnostics", (req, res) => {
+// 	res.json(`${req.method} invalid form submission`);
+// 	console.info(`${req.method} invalid form submission`);
+// });
 
 // Get Route wildcard for 404 page
 app.get("*", (req, res) =>
